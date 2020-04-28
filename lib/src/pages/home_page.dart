@@ -18,17 +18,18 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Peliculas Tosca'),
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
           icon: Icon(Icons.search), 
-          onPressed: (){ }
-            
-         
+          onPressed: (){ }          
           ),
         ],
       ),
-      body: Container(
+      body: Container(//toda la pantalla
+      
+        color: Colors.black,
+        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -68,8 +69,16 @@ class HomePage extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Populares', style: Theme.of(context).textTheme.subhead),
+          Container(
+            padding: EdgeInsets.only(left: 20.0),
+            child:
+              Text('Populares', style: TextStyle(color: Colors.white, height: 2, fontSize: 20)  ),    
+          ),
+
+          SizedBox(height: 5.0),
+
           FutureBuilder(
             future:peliculasProvider.getPopulares(),
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
@@ -82,11 +91,10 @@ class HomePage extends StatelessWidget {
 
               } else {
 
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
 
               }
-
-              
+            
             }
           ),
         ],
