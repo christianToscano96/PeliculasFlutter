@@ -16,6 +16,9 @@ class PeliculasProvider {
 
   int _popularesPage = 0;
 
+  //para tratar de no vargar todas las peliculas y solo ver las que esten mediante el scroll
+  bool _cargando     = false;
+ 
 
   //1 el manejo de Stream
   List<Pelicula> _populares = new List();
@@ -71,6 +74,12 @@ class PeliculasProvider {
 
   Future<List<Pelicula>> getPopulares() async {
    //generar el url mas facil
+
+    if( _cargando) return [];
+    //si no
+    _cargando = true;
+
+
     _popularesPage++;
 
     final url = Uri.https( _url, '3/movie/popular', {     
@@ -86,6 +95,7 @@ class PeliculasProvider {
 
     _populares.addAll(resp);
     popularesSink(_populares);
+     _cargando = false;
 
     return resp;
     
