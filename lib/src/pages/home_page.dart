@@ -15,6 +15,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    peliculasProvider.getPopulares();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Peliculas Tosca'),
@@ -34,7 +37,8 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             _swiperTarjetas(),
-            _footer(context),
+            _seccion1(context),
+            //_seccion2(context),
           ],
         ),
       )
@@ -65,7 +69,7 @@ class HomePage extends StatelessWidget {
 
 
   //metodo para crear el widget footer
-  Widget _footer(BuildContext context) {
+  Widget _seccion1(BuildContext context) {
     return Container(
       width: double.infinity,
       child: Column(
@@ -79,15 +83,18 @@ class HomePage extends StatelessWidget {
 
           SizedBox(height: 5.0),
 
-          FutureBuilder(
-            future:peliculasProvider.getPopulares(),
+          StreamBuilder(
+            stream:peliculasProvider.popularesStream,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
               
               //snapshot.data.forEach( (p) => print(p.title));
 
               if(snapshot.hasData) {
 
-                return MovieHorizontal(peliculas: snapshot.data );
+                return MovieHorizontal(
+                  peliculas: snapshot.data,
+                  siguientePagina: peliculasProvider.getPopulares,
+                );
 
               } else {
 
@@ -101,4 +108,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+  
 }

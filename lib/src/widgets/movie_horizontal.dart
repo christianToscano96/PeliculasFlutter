@@ -2,26 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:peliculas/src/models/pelicula_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
-  const MovieHorizontal({Key key, this.peliculas}) : super(key: key);
+  
+ 
 
   final List<Pelicula> peliculas;
+
+  final Function siguientePagina;
+
+   MovieHorizontal({@required this.peliculas, @required this.siguientePagina});
+
+  final _pageController = new PageController(
+    initialPage: 1,
+    viewportFraction: 0.3, //muestra la cantidad de card 
+  );
 
 
   @override
   Widget build(BuildContext context) {
 
     //variable para tomar el valor del tamaño de pantalla
+    final _screenSize = MediaQuery.of(context).size;
 
-    final _screenSise = MediaQuery.of(context).size;
+    //hacer un listener para escuchar todos los cambios en el buildController cuando llegue al final
+    _pageController.addListener( () {
+        if( _pageController.position.pixels >= _pageController.position.maxScrollExtent - 200) {
+          //print('Cargar las imagenes');
+          siguientePagina();
+        }
+    });
+
 
     return Container(
-      height: _screenSise.height * 0.2,
+      height: _screenSize.height * 0.2,
       child: PageView(
         pageSnapping: false,
-        controller: PageController(
-          initialPage: 1,
-          viewportFraction: 0.3, //muestra la cantidad de card 
-        ),
+        controller: _pageController,
         children: _tarjetas(),
       ),
     );
