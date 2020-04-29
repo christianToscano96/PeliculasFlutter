@@ -80,9 +80,20 @@ class Pelicula {
 
     //por si el poster vienen vacias
     if ( posterPath == null ) {
-      return 'https://img.icons8.com/clouds/2x/null-symbol.png';
+      return 'https://www.payetteforward.com/wp-content/uploads/2019/06/iphone-ear-speaker-not-working-828x466.jpg';
     }else {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  }
+
+
+  getBackgroundImg(){
+
+    //por si el poster vienen vacias
+    if ( posterPath == null ) {
+      return 'https://www.payetteforward.com/wp-content/uploads/2019/06/iphone-ear-speaker-not-working-828x466.jpg';
+    }else {
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
     }
   }
 }
