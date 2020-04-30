@@ -1,12 +1,14 @@
 //import el http
 
 
-import 'package:http/http.dart' as http; 
+import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 import 'dart:async';
 
+//models
 import 'package:peliculas/src/models/pelicula_model.dart';
+import 'package:peliculas/src/models/actores.model.dart'; 
 
 class PeliculasProvider {
 
@@ -16,7 +18,7 @@ class PeliculasProvider {
 
   int _popularesPage = 0;
 
-  //para tratar de no vargar todas las peliculas y solo ver las que esten mediante el scroll
+  //para tratar de no cargar todas las peliculas y solo ver las que esten mediante el scroll
   bool _cargando     = false;
  
 
@@ -100,4 +102,24 @@ class PeliculasProvider {
     return resp;
     
   }
+
+  //obtener los actores
+  Future<List<Actor>> getCast(String peliId) async {
+    
+    final url = Uri.https(_url, '3/movie/$peliId/credits', {
+      //hacer un mapa
+      'api_key'  : _apikey,
+      'language' : _lenguaje,
+    });
+
+    final resp = await http.get(url);
+    final decodeData = json.decode(resp.body);
+
+    final cast = new Cast.fromJsonList(decodeData['cast']);
+
+    return cast.actores;
+  }
+
+
+
 }

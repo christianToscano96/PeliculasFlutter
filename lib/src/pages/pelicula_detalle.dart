@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:peliculas/src/models/pelicula_model.dart';
+import 'package:peliculas/src/providers/peliculas_provider.dart';
 
 class PeliculaDetalle extends StatelessWidget {
   const PeliculaDetalle({Key key}) : super(key: key);
@@ -26,10 +27,8 @@ class PeliculaDetalle extends StatelessWidget {
                 _descripcion( pelicula ),
                 _descripcion( pelicula ),
                 _descripcion( pelicula ),
-                _descripcion( pelicula ),
-                _descripcion( pelicula ),
-                _descripcion( pelicula ),
-                _descripcion( pelicula ),
+                _crearCasting( context, pelicula ),
+                
                 
               ]
             )
@@ -44,7 +43,7 @@ class PeliculaDetalle extends StatelessWidget {
     return SliverAppBar(
       elevation: 2.0,
       backgroundColor: Colors.black,
-      expandedHeight: 250.0,
+      expandedHeight: 200.0,
       floating: false,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
@@ -62,7 +61,6 @@ class PeliculaDetalle extends StatelessWidget {
       ),
     );
   }
-
 
 
   Widget _posterTitulo(BuildContext context, Pelicula pelicula) {
@@ -85,10 +83,12 @@ class PeliculaDetalle extends StatelessWidget {
                   children: <Widget>[
                     Text(pelicula.title, style:  TextStyle(color: Colors.white, fontSize: 20.0), overflow: TextOverflow.clip, ),
                     Text(pelicula.originalTitle, style: TextStyle(color: Colors.white, fontSize: 14.0,height: 2.0) , overflow: TextOverflow.ellipsis),
+                    SizedBox(height: 10.0),
                     Row(
                       children: <Widget>[
                         Icon(Icons.star, color: Colors.yellow,),
-                        Text(pelicula.voteAverage.toString(),style: TextStyle(color: Colors.white, fontSize: 14.0)),
+                        SizedBox(width: 5.0),
+                        Text(pelicula.voteAverage.toString(),style: TextStyle(color: Colors.white, fontSize: 20.0)),
                       ],
                     ),
                   ],
@@ -108,6 +108,24 @@ class PeliculaDetalle extends StatelessWidget {
         style: TextStyle(color: Colors.white, ),
         textAlign: TextAlign.justify,
       ),
+    );
+  }
+
+  Widget _crearCasting(BuildContext context, Pelicula pelicula) {
+
+    final peliProvider = new PeliculasProvider();
+
+
+    return FutureBuilder(
+      future:peliProvider.getCast(pelicula.id.toString()),
+      builder:(BuildContext context, AsyncSnapshot<List> snapshot ){
+        
+        if( snapshot.hasData) {
+          return _crearActoresPageView( snapshot.data);
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      }  
     );
   }
 }
