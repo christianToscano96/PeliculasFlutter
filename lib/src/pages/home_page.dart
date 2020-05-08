@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:peliculas/src/providers/peliculas_provider.dart';
-
+import 'package:toscapeli/src/providers/peliculas_provider.dart';
 
 //widgets
-import 'package:peliculas/src/widgets/card_swiper_widget.dart';
-import 'package:peliculas/src/widgets/movie_horizontal.dart';
+import 'package:toscapeli/src/widgets/card_swiper_widget.dart';
+import 'package:toscapeli/src/widgets/movie_horizontal.dart';
 
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   //const HomePage({Key key}) : super(key: key);
@@ -19,9 +19,10 @@ class HomePage extends StatelessWidget {
     peliculasProvider.getPopulares();
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: GradientAppBar(
         title: Text('Peliculas Tosca'),
-        backgroundColor: Colors.black,
+        backgroundColorStart: Colors.purple[300],
+        backgroundColorEnd: Colors.purple[200],
         actions: <Widget>[
           IconButton(
           icon: Icon(Icons.search), 
@@ -30,9 +31,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Container(//toda la pantalla
-      
-        color: Colors.black,
-        
+           
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -78,7 +77,7 @@ class HomePage extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 20.0),
             child:
-              Text('Populares', style: TextStyle(color: Colors.white, height: 2, fontSize: 20)  ),    
+              Text('Populares', style: TextStyle(color: Colors.purple ,height: 2, fontSize: 20)  ),    
           ),
 
           SizedBox(height: 5.0),

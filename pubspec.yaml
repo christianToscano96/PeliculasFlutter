@@ -1,4 +1,4 @@
-name: peliculas
+name: toscapeli
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  gradient_app_bar: ^0.0.1
   flutter:
     sdk: flutter
 
@@ -25,7 +26,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_swiper: ^1.1.6
   http: ^0.12.0+4
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -44,7 +45,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/  
+   - assets/ 
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

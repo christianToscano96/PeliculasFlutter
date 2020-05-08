@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peliculas/src/models/pelicula_model.dart';
+import 'package:toscapeli/src/models/pelicula_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
   
@@ -39,30 +39,38 @@ class MovieHorizontal extends StatelessWidget {
         controller: _pageController,
         itemCount: peliculas.length,
         //children: _tarjetas(),
-        itemBuilder: ( context, i ) => _tarjeta(context, peliculas[i]),    
+        itemBuilder: ( context, i ) => _tarjeta(context, peliculas[i]),   
+
+
       ),
     );
   }
 
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
 
+    //para evitar el conflicto de los widgets para ir a pagina de detalle
+    pelicula.uniqueId = '${pelicula.id}-poster';
+
      final tarjeta = Container(
         margin: EdgeInsets.only(right: 15.0),
         child: Column(
           children: <Widget>[
-            ClipRRect(//para hacer boder rendondeeados
-              borderRadius: BorderRadius.circular(12.0),
-              child: FadeInImage(
-                placeholder: AssetImage('assets/no-image.jpg'), 
-                image: NetworkImage(pelicula.getPostrImg()),            
-                fit: BoxFit.cover, //abarcar todo el ancho posible
-                height: 135.0,
+            Hero(
+              tag: pelicula.uniqueId, //pasarle un parametro unico            
+              child: ClipRRect(//para hacer boder rendondeeados
+                borderRadius: BorderRadius.circular(12.0),
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/no-image.jpg'), 
+                  image: NetworkImage(pelicula.getPostrImg()),            
+                  fit: BoxFit.cover, //abarcar todo el ancho posible
+                  height: 135.0,
+                ),
               ),
             ),
             SizedBox(height: 5.0),
             Text(
               pelicula.title,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.purple),
               overflow: TextOverflow.ellipsis,
             )
           ],
