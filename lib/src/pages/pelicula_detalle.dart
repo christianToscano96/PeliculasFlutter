@@ -16,9 +16,9 @@ class PeliculaDetalle extends StatelessWidget {
 
     
     return Scaffold(
-      backgroundColor: Colors.deepPurple[800],
-
-      body: CustomScrollView(
+      
+      body: CustomScrollView( 
+        
         slivers: <Widget>[
           _crearAppbar( pelicula ),
           SliverList(
@@ -39,16 +39,16 @@ class PeliculaDetalle extends StatelessWidget {
   Widget _crearAppbar(Pelicula pelicula) {
 
     return SliverAppBar(
-      elevation: 2.0,
+      elevation: 2.0,    
       backgroundColor: Colors.black,
-      expandedHeight: 200.0,
+      expandedHeight: 300.0,
       floating: false,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         title: Text(
           pelicula.title,
-          style: TextStyle(color: Colors.white, fontSize: 16.0),
+          style: TextStyle(color: Colors.white, fontSize: 16.0, height: 5.0),
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
@@ -67,11 +67,14 @@ class PeliculaDetalle extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(30.0),
-              child: Image(
-              image: NetworkImage(pelicula.getPostrImg()),
-              height: 150.0,
+            Hero(
+              tag: pelicula.id,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image(
+                image: NetworkImage(pelicula.getPostrImg()),
+                height: 150.0,
+                ),
               ),
             ),
             SizedBox(width: 20.0),
@@ -79,14 +82,14 @@ class PeliculaDetalle extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(pelicula.title, style:  TextStyle(color: Colors.white, fontSize: 20.0), overflow: TextOverflow.clip, ),
-                    Text(pelicula.originalTitle, style: TextStyle(color: Colors.white, fontSize: 14.0,height: 2.0) , overflow: TextOverflow.ellipsis),
+                    Text(pelicula.title, style:  TextStyle(color: Colors.black, fontSize: 20.0), overflow: TextOverflow.clip, ),
+                    Text(pelicula.originalTitle, style: TextStyle(color: Colors.black, fontSize: 14.0,height: 2.0) , overflow: TextOverflow.ellipsis),
                     SizedBox(height: 10.0),
                     Row(
                       children: <Widget>[
-                        Icon(Icons.star, color: Colors.yellow,),
+                        Icon(Icons.star, color: Colors.yellow, size: 30.0,),
                         SizedBox(width: 5.0),
-                        Text(pelicula.voteAverage.toString(),style: TextStyle(color: Colors.white, fontSize: 20.0)),
+                        Text(pelicula.voteAverage.toString(),style: TextStyle(color: Colors.black, fontSize: 20.0)),
                       ],
                     ),
                   ],
@@ -103,7 +106,7 @@ class PeliculaDetalle extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
       child: Text(
         pelicula.overview,
-        style: TextStyle(color: Colors.white, ),
+        style: TextStyle(color: Colors.black, fontSize: 18.0, height: 1.4 ),
         textAlign: TextAlign.justify,
       ),
     );
@@ -148,10 +151,20 @@ class PeliculaDetalle extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          FadeInImage(
-            placeholder: AssetImage('assets/loading.gif'), 
-            image: NetworkImage(actor.getFoto())
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/loading.gif'), 
+              image: NetworkImage(actor.getFoto()),
+              height: 150.0,
+              fit: BoxFit.cover,  
+            ),
           ),
+          Text(
+            actor.name,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(height: 2.0),
+          )
         ],
       ),
     );
