@@ -1,4 +1,15 @@
 # toscapeli
+<div align="center"> 
+     <img width="45%" src="screenshot/screenshot.png" alt="About screen" title="About screen"</img> 
+     <img height="0" width="8px">      
+</div> 
+
+# Detalles Peli
+
+<div align="center"> 
+     <img width="45%" src="screenshot/screenshot2.png" alt="About screen" title="About screen"</img> 
+     <img height="0" width="8px">      
+</div> 
 
 A new Flutter project.
 
