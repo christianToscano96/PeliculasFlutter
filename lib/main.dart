@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 //pages
-import 'package:peliculas/src/pages/home_page.dart';
-import 'package:peliculas/src/pages/pelicula_detalle.dart';
+import 'package:toscapeli/src/pages/home_page.dart';
+import 'package:toscapeli/src/pages/pelicula_detalle.dart';
 
  
 void main() => runApp(MyApp());

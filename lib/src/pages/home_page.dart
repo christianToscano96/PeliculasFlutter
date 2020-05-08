@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:peliculas/src/providers/peliculas_provider.dart';
-
+import 'package:toscapeli/src/providers/peliculas_provider.dart';
 
 //widgets
-import 'package:peliculas/src/widgets/card_swiper_widget.dart';
-import 'package:peliculas/src/widgets/movie_horizontal.dart';
+import 'package:toscapeli/src/widgets/card_swiper_widget.dart';
+import 'package:toscapeli/src/widgets/movie_horizontal.dart';
 
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   //const HomePage({Key key}) : super(key: key);
@@ -19,9 +19,10 @@ class HomePage extends StatelessWidget {
     peliculasProvider.getPopulares();
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: GradientAppBar(
         title: Text('Peliculas Tosca'),
-        backgroundColor: Colors.black,
+        backgroundColorStart: Colors.deepPurple[600],
+        backgroundColorEnd: Colors.deepPurple[800],
         actions: <Widget>[
           IconButton(
           icon: Icon(Icons.search), 
@@ -31,7 +32,13 @@ class HomePage extends StatelessWidget {
       ),
       body: Container(//toda la pantalla
       
-        color: Colors.black,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Colors.deepPurple[600],Colors.deepPurple[800]]
+          )
+        ),
         
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

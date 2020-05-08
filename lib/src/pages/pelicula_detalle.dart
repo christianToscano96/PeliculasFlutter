@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:peliculas/src/models/pelicula_model.dart';
-import 'package:peliculas/src/providers/peliculas_provider.dart';
+import 'package:toscapeli/src/models/actores.model.dart';
+import 'package:toscapeli/src/models/pelicula_model.dart';
+
+import 'package:toscapeli/src/providers/peliculas_provider.dart';
 
 class PeliculaDetalle extends StatelessWidget {
   const PeliculaDetalle({Key key}) : super(key: key);
@@ -14,7 +16,7 @@ class PeliculaDetalle extends StatelessWidget {
 
     
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.deepPurple[800],
 
       body: CustomScrollView(
         slivers: <Widget>[
@@ -24,12 +26,8 @@ class PeliculaDetalle extends StatelessWidget {
               [
                 SizedBox(height: 10.0,),
                 _posterTitulo(context, pelicula ),
-                _descripcion( pelicula ),
-                _descripcion( pelicula ),
-                _descripcion( pelicula ),
-                _crearCasting( context, pelicula ),
-                
-                
+                _descripcion( pelicula ),              
+                _crearCasting( context, pelicula ),                        
               ]
             )
           )
@@ -111,6 +109,7 @@ class PeliculaDetalle extends StatelessWidget {
     );
   }
 
+
   Widget _crearCasting(BuildContext context, Pelicula pelicula) {
 
     final peliProvider = new PeliculasProvider();
@@ -126,6 +125,35 @@ class PeliculaDetalle extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
       }  
+    );
+  }
+
+  Widget _crearActoresPageView(List<Actor> actores) {
+
+    return SizedBox(
+      height: 200.0,
+      child: PageView.builder(
+        pageSnapping: false,
+        controller: PageController(
+          viewportFraction: 0.3,
+          initialPage: 1,
+        ),
+        itemCount: actores.length,
+        itemBuilder: (contex, i) => _actorTarjeta(actores[i])
+      ),
+    );
+  }
+
+  Widget _actorTarjeta( Actor actor) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          FadeInImage(
+            placeholder: AssetImage('assets/loading.gif'), 
+            image: NetworkImage(actor.getFoto())
+          ),
+        ],
+      ),
     );
   }
 }

@@ -88,13 +88,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  gradient_app_bar:
+    dependency: "direct main"
+    description:
+      name: gradient_app_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   http:
     dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.0+4"
+    version: "0.12.1"
   http_parser:
     dependency: transitive
     description:

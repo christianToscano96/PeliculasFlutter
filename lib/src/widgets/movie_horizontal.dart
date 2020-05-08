@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peliculas/src/models/pelicula_model.dart';
+import 'package:toscapeli/src/models/pelicula_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
   

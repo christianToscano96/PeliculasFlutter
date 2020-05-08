@@ -1,14 +1,12 @@
 //import el http
-
-
 import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 import 'dart:async';
 
 //models
-import 'package:peliculas/src/models/pelicula_model.dart';
-import 'package:peliculas/src/models/actores.model.dart'; 
+import 'package:toscapeli/src/models/actores.model.dart';
+import 'package:toscapeli/src/models/pelicula_model.dart'; 
 
 class PeliculasProvider {
 
@@ -119,7 +117,5 @@ class PeliculasProvider {
 
     return cast.actores;
   }
-
-
 
 }
