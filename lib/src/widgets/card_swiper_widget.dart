@@ -24,6 +24,7 @@ class CardSwiper extends StatelessWidget {
       child: Swiper(
           itemBuilder: (BuildContext context,int index){
 
+            //para evitar el conflicto de los widgets para ir a pagina de detalle
             peliculas[index].uniqueId = '${peliculas[index].id}-tarjeta';
 
             return Hero(
