@@ -5,7 +5,11 @@ import 'package:toscapeli/src/providers/peliculas_provider.dart';
 import 'package:toscapeli/src/widgets/card_swiper_widget.dart';
 import 'package:toscapeli/src/widgets/movie_horizontal.dart';
 
+//buscador 
+import 'package:toscapeli/src/search/search_delegate.dart';
+
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+
 
 class HomePage extends StatelessWidget {
   //const HomePage({Key key}) : super(key: key);
@@ -23,10 +27,17 @@ class HomePage extends StatelessWidget {
         title: Text('Peliculas Tosca'),
         backgroundColorStart: Colors.purple[300],
         backgroundColorEnd: Colors.purple[200],
+        //icono de busqueda
         actions: <Widget>[
           IconButton(
-          icon: Icon(Icons.search), 
-          onPressed: (){ }                
+            icon: Icon(Icons.search), 
+            onPressed: (){ 
+              showSearch(
+                context: context,
+                delegate: DataSearch(),
+                query: 'Buscar...'
+              );
+            }                
           ),
         ],
       ),

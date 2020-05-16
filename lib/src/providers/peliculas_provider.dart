@@ -118,4 +118,21 @@ class PeliculasProvider {
     return cast.actores;
   }
 
+
+
+
+  Future<List<Pelicula>> buscarPelicula(String query) async {
+    //generar el url mas facil
+    final url = Uri.https( _url, '3/search/movie', {
+      //hacer un mapa
+      'api_key'  : _apikey,
+      'language' : _lenguaje,
+      'query'    : query,
+    });
+    
+    //retornar _procesaRespuesta()
+    return await _procesaRespuesta(url);
+
+  }
+
 }
